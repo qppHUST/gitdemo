@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>注册界面</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+  <script>
+    window.onload = function (){
+      document.getElementById("form").onsubmit = function () {
+
+        return check_username() && check_password();//如果第一个是错的，那么第二个压根不会进行
+      }
+
+      document.getElementById("username").onblur = check_username;
+      document.getElementById("Password").onblur = check_password;
+    }
+
+    function check_username() {
+      let value = document.getElementById("username").value;
+
+      var reg = /^\w{6,12}$/;
+
+      var flag = reg.test(value);
+
+      let s_username = document.getElementById("s_username");
+
+      if(flag){
+        //提示为正确，后边加一个绿色的对勾
+        s_username.innerHTML = "<img src='imags/ic_对勾.png'>";
+      }else {
+        //加一个红色的叉叉
+        s_username.innerHTML = "<img src='imags/ic_叉叉.png'>";
+      }
+
+      return flag;
+    }
+
+    function check_password() {
+      let password = document.getElementById("Password").value;
+
+      var reg = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9~!@&%#_]{8,16}$///必须包含一个大写，一个小写字母，且长度为8到16位
+
+      let res = reg.test(password);
+
+      let s_password = document.getElementById("s_password");
+
+      if(res){
+        s_password.innerHTML = "<img src='imags/ic_对勾.png'>";
+      }else{
+        s_password.innerHTML = "<img src='imags/ic_叉叉.png'>";
+      }
+
+      return res;
+    }
+  </script>
+
+  <style>
+  /*  .main_part{
+      border: 5px solid #cbcbcb;
+      margin-top: 100px;
+      margin-left: 200px;
+      margin-right: 200px;
+    }*/
+
+
+  .container{
+    margin-top: 100px;
+    border: 5px solid red;
+  }
+
+  .row{
+    margin-top: 200px;
+    margin-left: 200px;
+    margin-right: 200px;
+    background-color: aliceblue;
+    height: 300px;
+    border-radius: 15px/15px;
+  }
+
+  body{
+    background-image: url('imags/background_img.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+
+  </style>
+</head>
+<body >
+<div class="row" >
+  <div class="col-md-3" style="margin-top: 30px"><img src="imags\\注册.png"><span style="color: gray">注册为新用户</span></div>
+  <div class="col-md-6" style="margin-top: 30px">
+    <form class="form-horizontal"  id = "form" method="get" action="request_demo_004">
+      <div class="form-group">
+        <label for="username" class="col-sm-2 control-label">username</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="username" name="username" placeholder="请输入6到12个单子字符">
+        </div>
+        <div id="s_username" class=" col-sm-1 error_"></div>
+      </div>
+      <div class="form-group">
+        <label for="Password" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-9">
+          <input type="password" class="form-control" id="Password" name="password" placeholder="Password">
+        </div>
+        <div id="s_password" class="col-sm-1 error_"></div>
+      </div>
+      <div class="form-group">
+        <label for="phone_number" class="col-sm-2 control-label">phonenumber</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="phone_number" placeholder="phonenumber">
+        </div>
+        <div id="s_phonenumber" class="col-sm-1 error_"></div>
+      </div>
+      <div class="form-group">
+        <label for="id" class="col-sm-2 control-label">name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="id" placeholder="id">
+        </div>
+        <div id="s_id" class="col-sm-1 error_"></div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default">Sign on</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-2" style="margin-top: 30px;float: right">已有帐号？<a href="index.html">去登陆</a></div>
+
+</div>
+
+
+
+</body>
+</html>
